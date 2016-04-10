@@ -1,21 +1,45 @@
+##########################################################################################
+## plot1.R
+## 
+## The purpose of this script is to create plot1.png for the Exploratory Data Analysis course
+## week 1 project.
+## 
+## 1. setup global variables
+## 
 fileUrl = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
-
-
-wd <- "~/Development/coursera/Exploratory Data Analysis"
 wd <- "/Users/robertl/Development/coursera/ExploratoryDataAnalysis/Week1Project"
 setwd( wd)
 
 zipfilename = "./data/powerconsumption.zip"
 txtfilename = "./data/household_power_consumption.txt"
 
-initialize<- function(){
-  install.packages("dplyr")
-  library(dplyr)
-  packageVersion("dplyr")
-  install.packages("tidyr")
-  library(tidyr)
-  install.packages("matrixStats")
-  library(matrixStats)
+##########################################################################################
+## install_load function
+## 
+## This function will install and load the list of libraries specified in the call to the function.
+## 1. vectorize the list of packages
+## 2. for each package:
+##    a. if a package is installed load the library
+##    b. if not installed then install and load the library
+## 
+install_load <- function (package1, ...)  {   
+  
+  # convert arguments to vector
+  packages <- c(package1, ...)
+  
+  # start loop to determine if each package is installed
+  for(package in packages){
+    
+    # if package is installed locally, load
+    if(package %in% rownames(installed.packages()))
+      do.call('library', list(package))
+    
+    # if package is not installed locally, download, then load
+    else {
+      install.packages(package)
+      do.call("library", list(package))
+    }
+  } 
 }
 
 ##########################################################################################
@@ -68,10 +92,20 @@ loadFileName <- function ( filename="README.txt" ){
   
 }
 
+##########################################################################################
+## plot1 function
+## 
+## draw the graph
+## 
 plot1 <- function( data){
   hist(data$Global_active_power, col="red", xlab = "Global Active Power (kilowatts)", main="Global Active Power")
 }
 
+##########################################################################################
+## png1 function
+## 
+## Open the file and call the plot function
+## 
 png1 <- function(data) {
   png(paste0(wd, "/", "plot1.png"),
       width = 480,
@@ -84,9 +118,15 @@ png1 <- function(data) {
 }
 
 
-#initialize()
+#install libraries
+install_load("dplyr", "tidyr")
 
+
+# get the data from the remote repository
 getData(zipfilename)
 
+#load the data file
 power<-loadFileName(txtfilename)
+
+#write the graph file
 png1( power)

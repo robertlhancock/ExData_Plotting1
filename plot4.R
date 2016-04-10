@@ -7,7 +7,15 @@ setwd( wd)
 
 zipfilename = "./data/powerconsumption.zip"
 txtfilename = "./data/household_power_consumption.txt"
-
+##########################################################################################
+## install_load function
+## 
+## This function will install and load the list of libraries specified in the call to the function.
+## 1. vectorize the list of packages
+## 2. for each package:
+##    a. if a package is installed load the library
+##    b. if not installed then install and load the library
+## 
 install_load <- function (package1, ...)  {   
   
   # convert arguments to vector
@@ -80,6 +88,11 @@ loadFileName <- function ( filename="README.txt" ){
   
 }
 
+##########################################################################################
+## plot4 function
+## 
+## draw the graph
+## 
 plot4 <- function( data){
   
   plot(
@@ -95,11 +108,21 @@ plot4 <- function( data){
   
 }
 
+##########################################################################################
+## plot1b function
+## 
+## draw the graph
+## 
 plot1b <- function( data){
   
   plot( data$Time, data$Global_active_power, type = "l", col="black", ylab = "Global Active Power", main="", xlab="")
 }
 
+##########################################################################################
+## plot2b function
+## 
+## draw the graph
+## 
 plot2b <- function(data){
   plot(
     data$Time,
@@ -111,6 +134,12 @@ plot2b <- function(data){
     xlab = "datetime"
   )
 }
+
+##########################################################################################
+## plot3b function
+## 
+## draw the graph
+## 
 plot3b <- function( data){
   
   plot(
@@ -132,6 +161,12 @@ plot3b <- function( data){
         col = "blue")
   legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col=c("black", "red", "blue"), bty="n", lty=1, lwd=2)  
 }
+
+##########################################################################################
+## png4 function
+## 
+## Open the file and call the plot functions
+## 
 png4 <- function(data) {
   png(paste0(wd, "/", "plot4.png"),
       width = 480,
@@ -148,7 +183,11 @@ png4 <- function(data) {
 #install libraries
 install_load("dplyr", "tidyr")
 
+#get the data from remote repository
 getData(zipfilename)
 
+# Load the data
 power<-loadFileName(txtfilename)
+
+#write the graph file
 png4( power)

@@ -8,6 +8,15 @@ setwd( wd)
 zipfilename = "./data/powerconsumption.zip"
 txtfilename = "./data/household_power_consumption.txt"
 
+##########################################################################################
+## install_load function
+## 
+## This function will install and load the list of libraries specified in the call to the function.
+## 1. vectorize the list of packages
+## 2. for each package:
+##    a. if a package is installed load the library
+##    b. if not installed then install and load the library
+## 
 install_load <- function (package1, ...)  {   
   
   # convert arguments to vector
@@ -27,6 +36,7 @@ install_load <- function (package1, ...)  {
     }
   } 
 }
+
 
 ##########################################################################################
 ## getData function
@@ -80,6 +90,11 @@ loadFileName <- function ( filename="README.txt" ){
   
 }
 
+##########################################################################################
+## plot3 function
+## 
+## draw the graph
+## 
 plot3 <- function( data){
   
   plot(
@@ -102,7 +117,11 @@ plot3 <- function( data){
   legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col=c("black", "red", "blue"),lty=1, lwd=2)  
 }
 
-
+##########################################################################################
+## png3 function
+## 
+## Open the file and call the plot function
+## 
 png3 <- function(data) {
   png(paste0(wd, "/", "plot3.png"),
       width = 480,
@@ -117,7 +136,11 @@ png3 <- function(data) {
 #install libraries
 install_load("dplyr", "tidyr")
 
+#get data from remote repository
 getData(zipfilename)
 
+#load the data
 power<-loadFileName(txtfilename)
+
+# write the graph file
 png3( power)
