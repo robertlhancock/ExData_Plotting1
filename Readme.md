@@ -2,11 +2,11 @@
 
 This repository holds 5 R files.
 
-plot1.R: create the first plot
-plot2.R: create the 2nd plot
-plot3.R: create the third plot
-plot4.R: create the fourth plot
-Week1Project.R: source each of the previous files
+1. plot1.R: create the first plot
+2. plot2.R: create the 2nd plot
+3. plot3.R: create the third plot
+4. plot4.R: create the fourth plot
+5. Week1Project.R: source each of the previous files
 
 ## Description
 
