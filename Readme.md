@@ -11,6 +11,7 @@ Week1Project.R: source each of the previous files.
 ## Description
 
 Each plotx.R file follows a similar pattern.
+
 1. if necessary install and load libraries needed by the script
 2. if necessary download the data from the remote repository
 3. load the file into memory
